@@ -1,0 +1,475 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@300;400&display=swap');
+
+:root {
+  --void: #1a1f35;
+  --aurora-teal: #2dd4bf;
+  --aurora-violet: #a5b4fc;
+  --text-primary: #e2e8f0;
+  --text-muted: #a8b5cc;
+  --text-dim: #7a8ba8;
+}
+
+.meditation-container {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--void);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, #2a3a6e 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, #1e3a50 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, #243060 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  padding: 24px 16px;
+}
+
+/* Star field */
+.meditation-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 22%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 5%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 18%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 88% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 38%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 48%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 72%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 68%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 92%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 88%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 33% 33%, rgba(129,140,248,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 67% 67%, rgba(45,212,191,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 18% 58%, rgba(251,113,133,0.4) 0%, transparent 100%);
+  pointer-events: none;
+  animation: twinkle 8s ease-in-out infinite alternate;
+}
+
+/* Nebula glow */
+.meditation-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 30% 20% at 15% 25%, rgba(165,180,252,0.09) 0%, transparent 100%),
+    radial-gradient(ellipse 25% 25% at 85% 70%, rgba(45,212,191,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 20% 15% at 50% 85%, rgba(253,164,175,0.06) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* ── Card ───────────────────────────────── */
+.meditation-card {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(145deg,
+    rgba(42,55,110,0.5) 0%,
+    rgba(25,35,75,0.65) 50%,
+    rgba(35,48,95,0.5) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border-radius: 28px;
+  padding: 44px 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 40px 80px rgba(0,0,0,0.6);
+  animation: cardFloat 10s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ── Typography ─────────────────────────── */
+.meditation-title {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--aurora-teal);
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.meditation-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--aurora-teal), transparent);
+  margin: 0 auto 24px;
+  opacity: 0.5;
+}
+
+/* ── Selects ─────────────────────────────── */
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '⌄';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-52%);
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 14px;
+}
+
+.time-select {
+  width: 100%;
+  padding: 12px 36px 12px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.time-select:hover {
+  border-color: rgba(45,212,191,0.35);
+  background: rgba(45,212,191,0.04);
+}
+
+.time-select:focus {
+  border-color: rgba(45,212,191,0.5);
+  box-shadow: 0 0 0 3px rgba(45,212,191,0.08);
+}
+
+.time-select option {
+  background: #2a3560;
+  color: var(--text-primary);
+  font-size: 15px;
+  padding: 8px;
+}
+
+/* ── Start button ───────────────────────── */
+.start-btn {
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  background: linear-gradient(135deg, rgba(45,212,191,0.9), rgba(20,184,166,0.8));
+  color: #04050d;
+  border-radius: 14px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.start-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.start-btn:hover::before { opacity: 1; }
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(45,212,191,0.3);
+}
+.start-btn:active { transform: translateY(0); }
+
+/* ── Breathing orb ──────────────────────── */
+.orb-wrapper {
+  margin: 8px auto 20px;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orb-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(45,212,191,0.15);
+  animation: ringPulse 8s ease-in-out infinite;
+}
+
+.orb-ring:nth-child(1) { width: 140px; height: 140px; animation-delay: 0s; }
+.orb-ring:nth-child(2) { width: 112px; height: 112px; border-color: rgba(129,140,248,0.12); animation-delay: -2s; }
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.12); }
+}
+
+.circle {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(110,231,183,0.9) 0%,
+    rgba(45,212,191,0.7) 40%,
+    rgba(20,184,166,0.4) 75%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 30px rgba(45,212,191,0.4),
+    0 0 70px rgba(45,212,191,0.15),
+    inset 0 0 20px rgba(255,255,255,0.15);
+  animation: breathe 8s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.4); }
+}
+
+.timer-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.breath-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+  min-height: 22px;
+}
+
+/* ── Action buttons ─────────────────────── */
+.meditation-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.pause-btn,
+.exit-btn {
+  flex: 1;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pause-btn {
+  background: rgba(45,212,191,0.12);
+  border: 1px solid rgba(45,212,191,0.25);
+  color: var(--aurora-teal);
+}
+
+.pause-btn:hover {
+  background: rgba(45,212,191,0.2);
+  transform: translateY(-1px);
+}
+
+.exit-btn {
+  background: rgba(251,113,133,0.08);
+  border: 1px solid rgba(251,113,133,0.2);
+  color: #fb7185;
+}
+
+.exit-btn:hover {
+  background: rgba(251,113,133,0.15);
+  transform: translateY(-1px);
+}
+
+/* ── Completion banner ──────────────────── */
+.completion-card {
+  background: linear-gradient(135deg, rgba(45,212,191,0.08) 0%, rgba(129,140,248,0.06) 100%);
+  border: 1px solid rgba(45,212,191,0.2);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  animation: fadeSlideIn 0.5s ease;
+}
+
+.completion-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--aurora-teal);
+  letter-spacing: 0.03em;
+}
+
+.completion-card span {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-style: normal;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Paused label ───────────────────────── */
+.state-label {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--aurora-violet);
+  border: 1px solid rgba(129,140,248,0.25);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 18px;
+}
+
+.progress-hint {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .meditation-container {
+    /* Don't fight the layout's height — just be the content height */
+    min-height: unset;
+    padding: 20px 14px;
+    align-items: flex-start;
+  }
+
+  .meditation-card {
+    max-width: 100%;
+    padding: 32px 24px;
+    border-radius: 20px;
+    /* Disable the float animation on mobile — it can cause scroll jitter */
+    animation: none;
+  }
+
+  .meditation-subtitle {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+
+  .time-select {
+    font-size: 15px;
+    padding: 12px 36px 12px 14px;
+    /* Force consistent native dropdown size on iOS */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .orb-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .orb-ring:nth-child(1) { width: 120px; height: 120px; }
+  .orb-ring:nth-child(2) { width: 96px;  height: 96px; }
+
+  .circle {
+    width: 72px;
+    height: 72px;
+  }
+
+  .timer-text {
+    font-size: 40px;
+  }
+
+  .pause-btn,
+  .exit-btn {
+    padding: 11px 10px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+  }
+}
+
+@media (max-width: 400px) {
+  .meditation-card {
+    padding: 28px 18px;
+  }
+
+  .meditation-subtitle {
+    font-size: 19px;
+  }
+
+  .timer-text {
+    font-size: 36px;
+  }
+
+  .start-btn {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 13px 18px;
+  }
+}

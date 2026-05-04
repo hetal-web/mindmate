@@ -1,0 +1,216 @@
+/* ════════════════════════════════════════════
+   MindMate — Global Responsive Styles
+   Add @import or paste at top of index.css
+════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ── Login / Register ────────────────────── */
+@media (max-width: 480px) {
+  /* Login and Register full-page containers already use minHeight:100vh.
+     Just ensure the inner card stretches properly. */
+  div[style*="maxWidth: 420px"],
+  div[style*="max-width: 420px"] {
+    margin: 16px !important;
+    padding: 24px 20px !important;
+  }
+}
+
+/* ── Dashboard ───────────────────────────── */
+@media (max-width: 600px) {
+  .hero-card {
+    flex-direction: column !important;
+    padding: 22px 18px !important;
+    gap: 12px !important;
+  }
+
+  .hero-title {
+    font-size: 1.4rem !important;
+  }
+
+  .hero-emoji {
+    font-size: 40px !important;
+    align-self: flex-end !important;
+  }
+
+  .hero-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Journal ─────────────────────────────── */
+@media (max-width: 600px) {
+  .journal-container {
+    padding: 0 0 24px !important;
+  }
+
+  .write-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .journal-btn,
+  .clear-btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .entry-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+}
+
+/* ── Calendar ────────────────────────────── */
+@media (max-width: 600px) {
+  .cal-day {
+    min-height: 52px !important;
+    padding: 5px 4px !important;
+  }
+
+  .cal-day-num {
+    font-size: 0.75rem !important;
+  }
+
+  .cal-entry-count {
+    display: none !important;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .cal-nav-btn {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ── Test pages ──────────────────────────── */
+@media (max-width: 600px) {
+  .test-header-card {
+    padding: 22px 18px !important;
+    border-radius: 14px !important;
+  }
+
+  .test-header-card h1 {
+    font-size: 1.3rem !important;
+  }
+
+  .question-card {
+    padding: 20px 16px !important;
+  }
+
+  .freq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .result-card {
+    padding: 28px 18px !important;
+  }
+
+  .personality-type-badge {
+    font-size: 1.8rem !important;
+    padding: 10px 20px !important;
+  }
+}
+
+/* ── MoodGraph ───────────────────────────── */
+@media (max-width: 600px) {
+  div[style*="maxWidth: 900px"] {
+    padding: 0 0 24px !important;
+  }
+
+  /* Stat cards row wrap */
+  div[style*="display: flex"][style*="gap: 14px"] {
+    flex-direction: column !important;
+  }
+}
+
+/* ── Report ──────────────────────────────── */
+@media (max-width: 600px) {
+  /* Report header flex */
+  div[style*="justify-content: space-between"][style*="linear-gradient"] {
+    flex-direction: column !important;
+    gap: 14px !important;
+    align-items: flex-start !important;
+  }
+
+  /* Stat cards grid */
+  div[style*="grid-template-columns: repeat(auto-fill, minmax(180px"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Mood analysis inner grid */
+  div[style*="grid-template-columns: repeat(auto-fill, minmax(200px"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Mental health score flex */
+  div[style*="display: flex"][style*="align-items: center"][style*="gap: 20px"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
+
+/* ── Meditation ──────────────────────────── */
+@media (max-width: 480px) {
+  .meditation-card {
+    width: 90vw !important;
+    padding: 32px 24px !important;
+  }
+
+  .timer-text {
+    font-size: 40px !important;
+  }
+}
+
+/* ── Emergency button ────────────────────── */
+@media (max-width: 480px) {
+  div[style*="position: fixed"][style*="bottom: 20px"][style*="right: 20px"] {
+    bottom: 12px !important;
+    right: 12px !important;
+    font-size: 0.85rem !important;
+    padding: 10px 14px !important;
+  }
+}
+
+/* ── General utility ─────────────────────── */
+@media (max-width: 600px) {
+  /* Prevent any fixed-width containers from overflowing */
+  .dashboard,
+  .journal-container,
+  .test-page {
+    max-width: 100% !important;
+  }
+
+  /* Shrink all blue gradient headers slightly */
+  .journal-header,
+  .test-header-card {
+    border-radius: 14px !important;
+  }
+}
