@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReportMoodChart from "./ReportMoodChart";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 // ─────────────────────────────────────────────
@@ -66,7 +66,7 @@ function Report() {
 
   useEffect(() => {
     if (!user.id) return;
-    fetch(`${API_URL}/report/data/${user.id}`)
+    fetch(`${config.API_URL}/report/data/${user.id}`)
       .then(res => res.json())
       .then(data => setReport(data))
       .catch(() => setError("Failed to load report. Please try again."));
@@ -108,7 +108,7 @@ function Report() {
           </p>
         </div>
         <button
-          onClick={() => window.open(`${API_URL}/report/${user.id || 1}`)}
+          onClick={() => window.open(`${config.API_URL}/report/${user.id || 1}`)}
           style={{ padding: "10px 20px", border: "2px solid rgba(255,255,255,0.4)", borderRadius: "10px", background: "rgba(255,255,255,0.15)", color: "white", fontWeight: "600", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s" }}
           onMouseEnter={e => e.target.style.background = "rgba(255,255,255,0.25)"}
           onMouseLeave={e => e.target.style.background = "rgba(255,255,255,0.15)"}

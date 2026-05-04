@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API_URL from "../config";
+import config from "../config";
 import EmergencyButton from "./Emergency";
 
 function Login({ onLoggedIn, onShowRegister }) {
@@ -17,7 +17,7 @@ function Login({ onLoggedIn, onShowRegister }) {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/login`, {
+      const res = await fetch(`${config.API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

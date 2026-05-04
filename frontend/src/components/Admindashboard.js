@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 function AdminDashboard() {
@@ -11,7 +11,7 @@ function AdminDashboard() {
 
   const fetchStats = useCallback(() => {
     if (!user?.id) return;
-    fetch(`${API_URL}/admin/stats?role=${user.role}`)
+    fetch(`${config.API_URL}/admin/stats?role=${user.role}`)
       .then(res => res.json())
       .then(data => {
         if (data.error) setError(data.error);
@@ -26,7 +26,7 @@ function AdminDashboard() {
     setDeletingId(userId);
     setConfirmId(null);
     try {
-      const res = await fetch(`${API_URL}/admin/delete-user/${userId}?role=${user.role}`, {
+      const res = await fetch(`${config.API_URL}/admin/delete-user/${userId}?role=${user.role}`, {
         method: "DELETE",
       });
       const data = await res.json();

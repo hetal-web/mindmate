@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import "./Meditation.css";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 function Meditation() {
@@ -26,7 +26,7 @@ function Meditation() {
   const saveMeditation = useCallback((duration) => {
     const userId = user?.id;
     if (!userId) return;
-    fetch(`${API_URL}/meditation`, {
+    fetch(`${config.API_URL}/meditation`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

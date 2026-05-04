@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Filler, Legend } from "chart.js";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Filler, Legend);
@@ -24,7 +24,7 @@ function MoodGraph() {
 
   useEffect(() => {
     if (!userId) return;
-    fetch(`${API_URL}/mood-last-24h/${userId}`)
+    fetch(`${config.API_URL}/mood-last-24h/${userId}`)
       .then(res => { if (!res.ok) throw new Error(); return res.json(); })
       .then(data => setMoodData(data))
       .catch(err => console.error("Error loading mood data:", err));

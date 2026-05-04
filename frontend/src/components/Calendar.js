@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Calendar.css";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 function Calendar() {
@@ -37,7 +37,7 @@ function Calendar() {
 
   useEffect(() => {
     if (!user.id) return;
-    fetch(`${API_URL}/calendar/${user.id}?year=${year}&month=${month + 1}`)
+    fetch(`${config.API_URL}/calendar/${user.id}?year=${year}&month=${month + 1}`)
       .then(res => res.json())
       .then(data => { setCalendarData(data.calendar); setStreak(data.streak); })
       .catch(err => console.error("Calendar error:", err));

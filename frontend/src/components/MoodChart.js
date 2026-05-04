@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 const moodMap = { 2: "Very Positive", 1: "Positive", 0: "Neutral", "-1": "Low", "-2": "Very Low" };
@@ -12,7 +12,7 @@ function MoodChart({ year, month }) {
 
   useEffect(() => {
     if (!userId) return;
-    fetch(`${API_URL}/mood-data/${userId}`)
+    fetch(`${config.API_URL}/mood-data/${userId}`)
       .then(res => res.json())
       .then(data => setMoodData(data))
       .catch(err => console.error("MoodChart fetch error:", err));

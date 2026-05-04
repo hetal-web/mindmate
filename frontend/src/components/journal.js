@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./journal.css";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 const emotionConfig = {
@@ -31,7 +31,7 @@ function Journal() {
     const userId = user.id;
     if (!userId) return;
     try {
-      const res = await fetch(`${API_URL}/journal/list/${userId}`);
+      const res = await fetch(`${config.API_URL}/journal/list/${userId}`);
       const data = await res.json();
       setEntries(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -53,7 +53,7 @@ function Journal() {
     setSaveError("");
     setSaveSuccess("");
     try {
-      await fetch(`${API_URL}/journal/add`, {
+      await fetch(`${config.API_URL}/journal/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: userId, content: text }),
@@ -71,7 +71,7 @@ function Journal() {
 
   const deleteJournal = async (id) => {
     try {
-      await fetch(`${API_URL}/journal/delete/${id}`, { method: "DELETE" });
+      await fetch(`${config.API_URL}/journal/delete/${id}`, { method: "DELETE" });
       loadJournals();
     } catch (err) {
       console.error("Delete error:", err);

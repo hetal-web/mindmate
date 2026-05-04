@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./Chat.css";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 // ── helpers ────────────────────────────────────────────────────────────────
@@ -105,7 +105,7 @@ function Chat() {
       const playChunk = async (index) => {
         if (index >= chunks.length || !voiceEnabledRef.current) return;
         try {
-          const res = await fetch(`${API_URL}/tts/hindi`, {
+          const res = await fetch(`${config.API_URL}/tts/hindi`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ text: chunks[index] }),
@@ -157,7 +157,7 @@ function Chat() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/chat`, {
+      const res = await fetch(`${config.API_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: userId, message: textToSend, detected_lang: lang }),
@@ -181,7 +181,7 @@ function Chat() {
   }, [speak, userId]);
 
   useEffect(() => {
-    fetch(`${API_URL}/chat/history/${userId}`)
+    fetch(`${config.API_URL}/chat/history/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         const msgs = assignHistoryTimestamps(data.messages || []);
@@ -225,7 +225,7 @@ function Chat() {
 
   const startNewChat = async () => {
     try {
-      await fetch(`${API_URL}/chat/reset/${userId}`, { method: "POST" });
+      await fetch(`${config.API_URL}/chat/reset/${userId}`, { method: "POST" });
       setChat([]);
       setInput("");
       localStorage.removeItem("crisisActive");

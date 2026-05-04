@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API_URL from "../config";
+import config from "../config";
 import EmergencyButton from "./Emergency";
 
 function Register({ onRegistered, onShowLogin }) {
@@ -33,7 +33,7 @@ function Register({ onRegistered, onShowLogin }) {
     if (password.length < 6) { setError("Password must be at least 6 characters"); return; }
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/register`, {
+      const res = await fetch(`${config.API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

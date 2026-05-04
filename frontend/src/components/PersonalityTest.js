@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Test.css";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 const mbtiColors = {
@@ -19,7 +19,7 @@ function PersonalityTest() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_URL}/personality/questions`)
+    fetch(`${config.API_URL}/personality/questions`)
       .then(res => res.json())
       .then(data => { setQuestions(data); setLoading(false); })
       .catch(err => { console.error("Error fetching questions:", err); setLoading(false); });
@@ -36,7 +36,7 @@ function PersonalityTest() {
   };
 
   const submitTest = (finalAnswers) => {
-    fetch(`${API_URL}/personality/submit`, {
+    fetch(`${config.API_URL}/personality/submit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id: user.id || 1, answers: finalAnswers }),

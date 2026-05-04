@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Test.css";
-import API_URL from "../config";
+import config from "../config";
 import useUser from "../hooks/useUser";
 
 const options = [
@@ -26,7 +26,7 @@ function MentalHealthTest() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_URL}/mental/questions`)
+    fetch(`${config.API_URL}/mental/questions`)
       .then(res => res.json())
       .then(data => { setQuestions(data); setLoading(false); })
       .catch(err => { console.error("Error fetching questions:", err); setLoading(false); });
@@ -45,7 +45,7 @@ function MentalHealthTest() {
 
   const submitResults = async (finalScore) => {
     try {
-      await fetch(`${API_URL}/mental/submit`, {
+      await fetch(`${config.API_URL}/mental/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id || 1, answers: { score: finalScore } }),
