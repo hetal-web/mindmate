@@ -33,11 +33,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB = os.path.join(BASE_DIR, "database.db")
 
 app = Flask(__name__)
-CORS(app, origins=[
-    "http://localhost:3000",
-    "https://mindmateapp.netlify.app/",    # ← your Netlify URL
-    "https://*.netlify.app"
-], supports_credentials=True)
+CORS(app, 
+     origins=["https://mindmateapp.netlify.app", "http://localhost:3000"],
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 app.register_blueprint(auth_bp)
 
 genai.configure(api_key=GEMINI_API_KEY)
