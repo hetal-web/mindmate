@@ -35,9 +35,8 @@ DB = os.path.join(BASE_DIR, "database.db")
 app = Flask(__name__)
 CORS(app, origins=[
     "http://localhost:3000",
-    "http://127.0.0.1:5000",
-    "https://mindmate.vercel.app",      # ← add your Vercel URL here
-    "https://mindmate-*.vercel.app"     # ← covers preview deployments too
+    "https://mindmateapp.netlify.app/",    # ← your Netlify URL
+    "https://*.netlify.app"
 ], supports_credentials=True)
 app.register_blueprint(auth_bp)
 
