@@ -1,0 +1,29 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables - NEVER commit these
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Database
+*.db
+
+# Generated files
+*.pdf
+*.png
+mood_chart_*.png
+wellness_report_*.pdf
+
+# Node
+node_modules/
+build/
+
+# VS Code
+.vscode/
