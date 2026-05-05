@@ -40,17 +40,6 @@ CORS(app,
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 app.register_blueprint(auth_bp)
 
-@app.route('/make-admin/<email>', methods=['GET'])
-def make_admin(email):
-    try:
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute("UPDATE users SET role='admin' WHERE email=?", (email,))
-        conn.commit()
-        conn.close()
-        return {"message": f"{email} is now admin"}, 200
-    except Exception as e:
-        return {"error": str(e)}, 500
 
 genai.configure(api_key=GEMINI_API_KEY)
 
@@ -125,6 +114,23 @@ try:
     conn.close()
 except Exception as e:
     print(f"Mental health seeding error: {e}")
+
+# Auto-create admin account
+try:
+    from werkzeug.security import generate_password_hash
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM users WHERE email=?", ("admin@mindmate.com",))
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (?, ?, ?, ?)
+        """, ("Admin", "admin@mindmate.com", generate_password_hash("hetalisadmin07"), "admin"))
+        conn.commit()
+        print("Admin account created!")
+    conn.close()
+except Exception as e:
+    print(f"Admin seeding error: {e}")
 
 def get_last_messages(user_id, limit=5):
     conn = get_connection()
