@@ -118,17 +118,20 @@ except Exception as e:
 # Auto-create admin account
 try:
     from werkzeug.security import generate_password_hash
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(*) FROM users WHERE email=?", ("admin@mindmate.com",))
-    if cursor.fetchone()[0] == 0:
-        cursor.execute("""
-            INSERT INTO users (name, email, password, role)
-            VALUES (?, ?, ?, ?)
-        """, ("Admin", "admin@mindmate.com", generate_password_hash("hetalisadmin07"), "admin"))
-        conn.commit()
-        print("Admin account created!")
-    conn.close()
+    admin_email = os.getenv("ADMIN_EMAIL")
+    admin_password = os.getenv("ADMIN_PASSWORD")
+    if admin_email and admin_password:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM users WHERE email=?", (admin_email,))
+        if cursor.fetchone()[0] == 0:
+            cursor.execute("""
+                INSERT INTO users (name, email, password, role)
+                VALUES (?, ?, ?, ?)
+            """, ("Admin", admin_email, generate_password_hash(admin_password), "admin"))
+            conn.commit()
+            print("Admin account created!")
+        conn.close()
 except Exception as e:
     print(f"Admin seeding error: {e}")
 
