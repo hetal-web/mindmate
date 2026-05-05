@@ -40,6 +40,18 @@ CORS(app,
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 app.register_blueprint(auth_bp)
 
+@app.route('/make-admin/<email>', methods=['GET'])
+def make_admin(email):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE users SET role='admin' WHERE email=?", (email,))
+        conn.commit()
+        conn.close()
+        return {"message": f"{email} is now admin"}, 200
+    except Exception as e:
+        return {"error": str(e)}, 500
+
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Create tables on startup
