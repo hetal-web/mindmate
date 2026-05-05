@@ -43,8 +43,16 @@ app.register_blueprint(auth_bp)
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Create tables on startup
-create_tables()
 
+
+
+create_tables()
+styles = [
+    "Respond casually and warmly.",
+    "Respond like a supportive friend.",
+    "Keep it calm and reassuring.",
+    "Be slightly motivational but gentle.",
+]
 # Auto-seed personality questions
 try:
     conn = get_connection()
