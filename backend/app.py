@@ -45,13 +45,66 @@ genai.configure(api_key=GEMINI_API_KEY)
 # Create tables on startup
 create_tables()
 
-styles = [
-    "Respond casually and warmly.",
-    "Respond like a supportive friend.",
-    "Keep it calm and reassuring.",
-    "Be slightly motivational but gentle.",
-]
+# Auto-seed personality questions
+try:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM personality_questions")
+    if cursor.fetchone()[0] == 0:
+        cursor.executemany("""
+            INSERT OR REPLACE INTO personality_questions
+            (id, question, option_a, option_b, trait_a, trait_b)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, [
+            (1,"You feel more energized after:","Spending time with people","Spending time alone","E","I"),
+            (2,"In social situations, you usually:","Start conversations","Wait for others","E","I"),
+            (3,"You prefer:","Group activities","Solo activities","E","I"),
+            (4,"You think best when:","Talking out loud","Thinking quietly","E","I"),
+            (5,"You focus more on:","Facts and details","Ideas and possibilities","S","N"),
+            (6,"You trust:","Experience","Intuition","S","N"),
+            (7,"You prefer work that is:","Practical","Creative","S","N"),
+            (8,"You are more interested in:","Present reality","Future possibilities","S","N"),
+            (9,"When making decisions, you rely on:","Logic","Emotions","T","F"),
+            (10,"You value more:","Truth","Harmony","T","F"),
+            (11,"You are more:","Objective","Compassionate","T","F"),
+            (12,"You make decisions based on:","Facts","Feelings","T","F"),
+            (13,"You prefer:","Planning ahead","Being spontaneous","J","P"),
+            (14,"You like your life to be:","Organized","Flexible","J","P"),
+            (15,"You prefer:","Completing tasks early","Doing tasks last minute","J","P"),
+            (16,"You work better with:","Clear structure","Freedom and flexibility","J","P"),
+        ])
+        conn.commit()
+        print("Personality questions seeded!")
+    conn.close()
+except Exception as e:
+    print(f"Personality seeding error: {e}")
 
+# Auto-seed mental health questions
+try:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM mental_health_questions")
+    if cursor.fetchone()[0] == 0:
+        cursor.executemany("""
+            INSERT OR REPLACE INTO mental_health_questions
+            (id, question) VALUES (?, ?)
+        """, [
+            (1,"I feel sad or down frequently"),
+            (2,"I have trouble sleeping"),
+            (3,"I feel anxious or nervous"),
+            (4,"I have low energy"),
+            (5,"I feel hopeless"),
+            (6,"I have difficulty concentrating"),
+            (7,"I feel overwhelmed"),
+            (8,"I feel lonely"),
+            (9,"I feel worthless"),
+            (10,"I lack motivation"),
+        ])
+        conn.commit()
+        print("Mental health questions seeded!")
+    conn.close()
+except Exception as e:
+    print(f"Mental health seeding error: {e}")
 
 def get_last_messages(user_id, limit=5):
     conn = get_connection()
