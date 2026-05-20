@@ -1,37 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function EmergencyButton() {
   const [showPopup, setShowPopup] = useState(false);
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    const crisis = localStorage.getItem("crisisActive");
-    if (crisis === "true") {
-      setActive(true);
-    }
-  }, []);
 
   return (
     <>
-      {/* 🟢 FLOATING BUTTON */}
-      {active && (
-        <div
-          onClick={() => setShowPopup(true)}
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            background: "#ff4d4d",
-            color: "white",
-            padding: "12px 16px",
-            borderRadius: "30px",
-            cursor: "pointer",
-            zIndex: 999
-          }}
-        >
-          🚨 Need Help?
-        </div>
-      )}
+      {/* 🟢 FLOATING BUTTON — always visible */}
+      <div
+        onClick={() => setShowPopup(true)}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          background: "#ff4d4d",
+          color: "white",
+          padding: "12px 16px",
+          borderRadius: "30px",
+          cursor: "pointer",
+          zIndex: 999
+        }}
+      >
+        🚨 Need Help?
+      </div>
 
       {/* 🚨 POPUP */}
       {showPopup && (
