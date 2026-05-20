@@ -30,7 +30,14 @@ function MoodGraph() {
       .catch(err => console.error("Error loading mood data:", err));
   }, [userId]);
 
-  const labels = moodData.map(d => new Date(d.time || d.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+  const toUTC = (str) => {
+    if (!str) return new Date();
+    // SQLite stores as "YYYY-MM-DD HH:MM:SS" in UTC — append Z so JS parses it as UTC
+    // and automatically converts to local time (IST = UTC+5:30)
+    const s = String(str).trim();
+    return new Date(s.includes("T") || s.endsWith("Z") ? s : s.replace(" ", "T") + "Z");
+  };
+  const labels = moodData.map(d => toUTC(d.time || d.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
   const chartInnerWidth = Math.max(900, labels.length * 80);
   const scores = moodData.map(d => d.score);
 
