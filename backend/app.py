@@ -316,18 +316,19 @@ def normalize_emotion(emotion):
 def save_mood(user_id, emotion):
     emotion = normalize_emotion(emotion)
     score = emotion_to_score(emotion)
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Fix: use IST instead of UTC
+    from datetime import timezone, timedelta
+    IST = timezone(timedelta(hours=5, minutes=30))
+    now = datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S")
 
     conn = get_connection()
     cursor = conn.cursor()
-
     cursor.execute("""
         INSERT INTO mood_logs (user_id, emotion, score, created_at, source)
         VALUES (?, ?, ?, ?, 'ai')
     """, (user_id, emotion, score, now))
-
     print("SAVING:", user_id, emotion, score)
-
     conn.commit()
     conn.close()
 

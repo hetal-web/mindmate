@@ -34,12 +34,12 @@ def get_last_24h_mood(user_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT created_at, score
-        FROM mood_logs
-        WHERE user_id = ?
-        AND created_at >= datetime('now', '-1 day')
-        ORDER BY created_at ASC
-    """, (user_id,))
+    SELECT created_at, score
+    FROM mood_logs
+    WHERE user_id = ?
+    AND created_at >= datetime('now', '+5 hours 30 minutes', '-1 day')
+    ORDER BY created_at ASC
+""", (user_id,))
 
     rows = cursor.fetchall()
     conn.close()
