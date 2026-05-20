@@ -30,11 +30,8 @@ function MoodGraph() {
       .catch(err => console.error("Error loading mood data:", err));
   }, [userId]);
 
-const labels = moodData.map(d => new Date(d.time || d.date).toLocaleTimeString("en-IN", { 
-  hour: "2-digit", 
-  minute: "2-digit",
-  timeZone: "Asia/Kolkata"
-}));  const chartInnerWidth = Math.max(900, labels.length * 80);
+  const labels = moodData.map(d => new Date(d.time || d.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+  const chartInnerWidth = Math.max(900, labels.length * 80);
   const scores = moodData.map(d => d.score);
 
   const chartData = {
