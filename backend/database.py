@@ -32,22 +32,16 @@ def get_mood_data(user_id):
 def get_last_24h_mood(user_id):
     conn = get_connection()
     cursor = conn.cursor()
-
     cursor.execute("""
-    SELECT created_at, score
-    FROM mood_logs
-    WHERE user_id = ?
-    AND created_at >= datetime('now', '+5 hours 30 minutes', '-1 day')
-    ORDER BY created_at ASC
-""", (user_id,))
-
+        SELECT created_at, score
+        FROM mood_logs
+        WHERE user_id = ?
+        ORDER BY created_at DESC
+        LIMIT 50
+    """, (user_id,))
     rows = cursor.fetchall()
     conn.close()
-
-    return [
-        {"time": r[0], "score": r[1]}
-        for r in rows
-    ]
+    return [{"time": r[0], "score": r[1]} for r in rows]
 
 def create_tables():
 
